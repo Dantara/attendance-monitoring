@@ -10,11 +10,29 @@ use Mix.Config
 # which you should run after static files are built and
 # before starting your production server.
 config :attendance, AttendanceWeb.Endpoint,
-  url: [host: "example.com", port: 80],
+  url: [scheme: "https", host: "attendance-inno.herokuapp.com", port: 443],
+  force_ssl: [rewrite_on: [:x_forwarded_proto]],
+  secret_key_base: System.get_env("SECRET_KEY_BASE"),
   cache_static_manifest: "priv/static/cache_manifest.json"
 
 # Do not print debug messages in production
 config :logger, level: :info
+
+# # We'll enable SSL and force its use, and fetch the SECRET_KEY_BASE environment
+# # variable.
+# config :firestorm_web, FirestormWeb.Web.Endpoint,
+#   # ...
+#   url: [scheme: "https", host: "firestorm-forum.herokuapp.com", port: 443],
+#   force_ssl: [rewrite_on: [:x_forwarded_proto]],
+#   secret_key_base: System.get_env("SECRET_KEY_BASE")
+# # ...
+# # We'll use the POOL_SIZE var and let Heroku tell us how to talk to our database
+config :attendance, AttendanceWeb.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  url: System.get_env("DATABASE_URL"),
+  pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
+  ssl: true
+# # and we don't need a prod secrets file so we can remove that
 
 # ## SSL Support
 #
@@ -52,4 +70,4 @@ config :logger, level: :info
 
 # Finally import the config/prod.secret.exs which loads secrets
 # and configuration from environment variables.
-import_config "prod.secret.exs"
+# import_config "prod.secret.exs"
