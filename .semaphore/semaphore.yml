@@ -26,3 +26,8 @@ blocks:
             - mix ecto.create
             - mix ecto.migrate
             - mix test
+promotions:
+  - name: Heroku
+    pipeline_file: heroku.yml
+    auto_promote:
+      when: branch = 'master' AND result = 'passed'
