@@ -1,5 +1,8 @@
 #!/bin/bash
 
 NODE_ENV=production ./node_modules/.bin/webpack -p
+
 cd ..
 mix phx.digest
+# MIX_ENV=prod mix ecto.create
+# MIX_ENV=prod mix ecto.migrate
