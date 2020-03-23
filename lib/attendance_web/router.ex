@@ -1,5 +1,6 @@
 defmodule AttendanceWeb.Router do
   use AttendanceWeb, :router
+  use Pow.Phoenix.Router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -13,6 +14,10 @@ defmodule AttendanceWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :protected do
+    plug Pow.Plug.RequireAuthenticated,
+      error_handler: Pow.Phoenix.PlugErrorHandler
+  end
 
   scope "/", AttendanceWeb do
     pipe_through :browser
@@ -22,7 +27,11 @@ defmodule AttendanceWeb.Router do
 
   scope "/api", AttendanceWeb do
     pipe_through :api
+  end
 
-    resources "/students", StudentController, except: [:new, :edit]
+  scope "/" do
+    pipe_through :browser
+
+    pow_routes()
   end
 end
