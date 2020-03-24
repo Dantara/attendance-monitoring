@@ -8,10 +8,16 @@ defmodule AttendanceWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug Pow.Plug.Session, otp_app: :attendance
   end
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug AttendanceWeb.APIAuthPlug, otp_app: :attendance
+  end
+
+  pipeline :api_protected do
+    plug Pow.Plug.RequireAuthenticated, error_handler: AttendanceWeb.APIAuthErrorHandler
   end
 
   pipeline :not_authenticated do
@@ -31,8 +37,6 @@ defmodule AttendanceWeb.Router do
     post "/signup", RegistrationController, :create, as: :signup
     get "/login", SessionController, :new, as: :login
     post "/login", SessionController, :create, as: :login
-
-    # get "/", PageController, :index
   end
 
   scope "/", AttendanceWeb do
@@ -42,9 +46,15 @@ defmodule AttendanceWeb.Router do
     delete "/logout", SessionController, :delete, as: :logout
   end
 
-  scope "/api", AttendanceWeb do
+  scope "/api", AttendanceWeb.API do
     pipe_through :api
 
     resources "/roles", RoleController, only: [:index, :show]
+    resources "/session", SessionController, singleton: true, only: [:create, :delete]
+    post "/session/renew", SessionController, :renew
+  end
+
+  scope "/api", AttendanceWeb do
+    pipe_through [:api, :api_protected]
   end
 end

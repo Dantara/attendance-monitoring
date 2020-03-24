@@ -1,4 +1,4 @@
-defmodule AttendanceWeb.RoleController do
+defmodule AttendanceWeb.API.RoleController do
   use AttendanceWeb, :controller
 
   alias Attendance.Accounts

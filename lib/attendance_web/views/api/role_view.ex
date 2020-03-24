@@ -1,6 +1,6 @@
-defmodule AttendanceWeb.RoleView do
+defmodule AttendanceWeb.API.RoleView do
   use AttendanceWeb, :view
-  alias AttendanceWeb.RoleView
+  alias AttendanceWeb.API.RoleView
 
   def render("index.json", %{roles: roles}) do
     %{roles: render_many(roles, RoleView, "role.json")}
