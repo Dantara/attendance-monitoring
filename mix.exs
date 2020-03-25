@@ -1,9 +1,9 @@
-defmodule Attendance.MixProject do
+defmodule AttendanceApp.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :attendance,
+      app: :attendance_app,
       version: "0.1.0",
       elixir: "~> 1.5",
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -19,7 +19,7 @@ defmodule Attendance.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {Attendance.Application, []},
+      mod: {AttendanceApp.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end

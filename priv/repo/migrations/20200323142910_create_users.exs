@@ -1,4 +1,4 @@
-defmodule Attendance.Repo.Migrations.CreateUsers do
+defmodule AttendanceApp.Repo.Migrations.CreateUsers do
   use Ecto.Migration
 
   def change do

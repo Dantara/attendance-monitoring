@@ -1,4 +1,4 @@
-defmodule AttendanceWeb.ChannelCase do
+defmodule AttendanceAppWeb.ChannelCase do
   @moduledoc """
   This module defines the test case to be used by
   channel tests.
@@ -11,7 +11,7 @@ defmodule AttendanceWeb.ChannelCase do
   we enable the SQL sandbox, so changes done to the database
   are reverted at the end of every test. If you are using
   PostgreSQL, you can even run database tests asynchronously
-  by setting `use AttendanceWeb.ChannelCase, async: true`, although
+  by setting `use AttendanceAppWeb.ChannelCase, async: true`, although
   this option is not recommended for other databases.
   """
 
@@ -23,15 +23,15 @@ defmodule AttendanceWeb.ChannelCase do
       use Phoenix.ChannelTest
 
       # The default endpoint for testing
-      @endpoint AttendanceWeb.Endpoint
+      @endpoint AttendanceAppWeb.Endpoint
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Attendance.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(AttendanceApp.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Attendance.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(AttendanceApp.Repo, {:shared, self()})
     end
 
     :ok

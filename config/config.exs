@@ -7,15 +7,15 @@
 # General application configuration
 use Mix.Config
 
-config :attendance,
-  ecto_repos: [Attendance.Repo]
+config :attendance_app,
+  ecto_repos: [AttendanceApp.Repo]
 
 # Configures the endpoint
-config :attendance, AttendanceWeb.Endpoint,
+config :attendance_app, AttendanceAppWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "D/9wr5U0c7pRp9v6btiPjMsfnRdlYpajDkGdaCh0bmr7dhKk8LI3E2Zz7NQVc+sq",
-  render_errors: [view: AttendanceWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Attendance.PubSub, adapter: Phoenix.PubSub.PG2]
+  render_errors: [view: AttendanceAppWeb.ErrorView, accepts: ~w(html json)],
+  pubsub: [name: AttendanceApp.PubSub, adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
 config :logger, :console,
@@ -25,10 +25,10 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
-config :attendance, :pow,
-  user: Attendance.Accounts.User,
-  repo: Attendance.Repo,
-  web_module: AttendanceWeb
+config :attendance_app, :pow,
+  user: AttendanceApp.Accounts.User,
+  repo: AttendanceApp.Repo,
+  web_module: AttendanceAppWeb
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

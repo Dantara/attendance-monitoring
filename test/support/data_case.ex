@@ -1,4 +1,4 @@
-defmodule Attendance.DataCase do
+defmodule AttendanceApp.DataCase do
   @moduledoc """
   This module defines the setup for tests requiring
   access to the application's data layer.
@@ -10,7 +10,7 @@ defmodule Attendance.DataCase do
   we enable the SQL sandbox, so changes done to the database
   are reverted at the end of every test. If you are using
   PostgreSQL, you can even run database tests asynchronously
-  by setting `use Attendance.DataCase, async: true`, although
+  by setting `use AttendanceApp.DataCase, async: true`, although
   this option is not recommended for other databases.
   """
 
@@ -18,20 +18,20 @@ defmodule Attendance.DataCase do
 
   using do
     quote do
-      alias Attendance.Repo
+      alias AttendanceApp.Repo
 
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
-      import Attendance.DataCase
+      import AttendanceApp.DataCase
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Attendance.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(AttendanceApp.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Attendance.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(AttendanceApp.Repo, {:shared, self()})
     end
 
     :ok

@@ -1,10 +1,10 @@
 use Mix.Config
 
 # Configure your database
-config :attendance, Attendance.Repo,
+config :attendance_app, AttendanceApp.Repo,
   username: "postgres",
   password: "postgres",
-  database: "attendance_dev",
+  database: "attendance_app_dev",
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
@@ -15,7 +15,7 @@ config :attendance, Attendance.Repo,
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with webpack to recompile .js and .css sources.
-config :attendance, AttendanceWeb.Endpoint,
+config :attendance_app, AttendanceAppWeb.Endpoint,
   http: [port: 4000],
   debug_errors: true,
   code_reloader: true,
@@ -55,13 +55,13 @@ config :attendance, AttendanceWeb.Endpoint,
 # different ports.
 
 # Watch static and templates for browser reloading.
-config :attendance, AttendanceWeb.Endpoint,
+config :attendance_app, AttendanceAppWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
-      ~r"lib/attendance_web/(live|views)/.*(ex)$",
-      ~r"lib/attendance_web/templates/.*(eex)$"
+      ~r"lib/attendance_app_web/(live|views)/.*(ex)$",
+      ~r"lib/attendance_app_web/templates/.*(eex)$"
     ]
   ]
 

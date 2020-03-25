@@ -1,4 +1,4 @@
-defmodule Attendance.Repo.Migrations.CreateRoles do
+defmodule AttendanceApp.Repo.Migrations.CreateRoles do
   use Ecto.Migration
 
   def change do

@@ -16,10 +16,10 @@ blocks:
             - git remote add heroku $HEROKU_REMOTE
             - 'git push heroku -f $SEMAPHORE_GIT_BRANCH:master'
       secrets:
-        - name: attendance-heroku
+        - name: attendance_app-heroku
       env_vars:
         - name: HEROKU_REMOTE
-          value: 'https://git.heroku.com/attendance-inno.git'
+          value: 'https://git.heroku.com/attendance_app-inno.git'
 agent:
   machine:
     type: e1-standard-2
