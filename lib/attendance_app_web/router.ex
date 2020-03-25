@@ -59,5 +59,6 @@ defmodule AttendanceAppWeb.Router do
 
     get "/user_role", RoleController, :user_role
     get "/current_user", UserController, :show
+    resources "/activities", ActivityController, except: [:new, :edit]
   end
 end
