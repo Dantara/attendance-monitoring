@@ -54,7 +54,10 @@ defmodule AttendanceWeb.Router do
     post "/session/renew", SessionController, :renew
   end
 
-  scope "/api", AttendanceWeb do
+  scope "/api", AttendanceWeb.API do
     pipe_through [:api, :api_protected]
+
+    get "/user_role", RoleController, :user_role
+    get "/current_user", UserController, :show
   end
 end

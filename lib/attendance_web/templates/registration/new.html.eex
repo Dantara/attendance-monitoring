@@ -13,7 +13,7 @@
     <%= error_tag f, :last_name %>
 
     <%= label f, :role %>
-    <%= select f, :roles, parse_roles(@roles), selected: [1] %>
+    <%= select f, :role_id, parse_roles(@role), selected: [1] %>
     <%= error_tag f, :role %>
 
     <%= label f, :password %>

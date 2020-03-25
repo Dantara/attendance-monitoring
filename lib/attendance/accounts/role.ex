@@ -5,6 +5,7 @@ defmodule Attendance.Accounts.Role do
   schema "roles" do
     field :title, :string
     # belongs_to :user, Attendance.Accounts.User
+    has_many :user, Attendance.Accounts.User
 
     timestamps()
   end

@@ -3,6 +3,7 @@ defmodule AttendanceWeb.API.RoleController do
 
   alias Attendance.Accounts
   alias Attendance.Accounts.Role
+  alias Attendance.Repo
 
   action_fallback AttendanceWeb.FallbackController
 
@@ -11,33 +12,16 @@ defmodule AttendanceWeb.API.RoleController do
     render(conn, "index.json", roles: roles)
   end
 
-  # def create(conn, %{"role" => role_params}) do
-  #   with {:ok, %Role{} = role} <- Accounts.create_role(role_params) do
-  #     conn
-  #     |> put_status(:created)
-  #     |> put_resp_header("location", Routes.role_path(conn, :show, role))
-  #     |> render("show.json", role: role)
-  #   end
-  # end
-
   def show(conn, %{"id" => id}) do
     role = Accounts.get_role!(id)
     render(conn, "show.json", role: role)
   end
 
-  # def update(conn, %{"id" => id, "role" => role_params}) do
-  #   role = Accounts.get_role!(id)
+  def user_role(conn, _params) do
+    current_user =
+      Pow.Plug.current_user(conn)
+      |> Repo.preload(:role)
 
-  #   with {:ok, %Role{} = role} <- Accounts.update_role(role, role_params) do
-  #     render(conn, "show.json", role: role)
-  #   end
-  # end
-
-  # def delete(conn, %{"id" => id}) do
-  #   role = Accounts.get_role!(id)
-
-  #   with {:ok, %Role{}} <- Accounts.delete_role(role) do
-  #     send_resp(conn, :no_content, "")
-  #   end
-  # end
+    render(conn, "show.json", role: current_user.role)
+  end
 end
