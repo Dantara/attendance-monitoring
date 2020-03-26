@@ -4,6 +4,7 @@ defmodule AttendanceApp.Attendance.Class do
 
   schema "classes" do
     field :title, :string
+    has_many :presences, AttendanceApp.Attendance.Presence
 
     timestamps()
   end

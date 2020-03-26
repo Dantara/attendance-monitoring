@@ -120,4 +120,63 @@ defmodule AttendanceApp.AttendanceTest do
   #     assert %Ecto.Changeset{} = Attendance.change_class(class)
   #   end
   # end
+
+  # describe "presences" do
+  #   alias AttendanceApp.Attendance.Presence
+
+  #   @valid_attrs %{week: 42}
+  #   @update_attrs %{week: 43}
+  #   @invalid_attrs %{week: nil}
+
+  #   def presence_fixture(attrs \\ %{}) do
+  #     {:ok, presence} =
+  #       attrs
+  #       |> Enum.into(@valid_attrs)
+  #       |> Attendance.create_presence()
+
+  #     presence
+  #   end
+
+  #   test "list_presences/0 returns all presences" do
+  #     presence = presence_fixture()
+  #     assert Attendance.list_presences() == [presence]
+  #   end
+
+  #   test "get_presence!/1 returns the presence with given id" do
+  #     presence = presence_fixture()
+  #     assert Attendance.get_presence!(presence.id) == presence
+  #   end
+
+  #   test "create_presence/1 with valid data creates a presence" do
+  #     assert {:ok, %Presence{} = presence} = Attendance.create_presence(@valid_attrs)
+  #     assert presence.week == 42
+  #   end
+
+  #   test "create_presence/1 with invalid data returns error changeset" do
+  #     assert {:error, %Ecto.Changeset{}} = Attendance.create_presence(@invalid_attrs)
+  #   end
+
+  #   test "update_presence/2 with valid data updates the presence" do
+  #     presence = presence_fixture()
+  #     assert {:ok, %Presence{} = presence} = Attendance.update_presence(presence, @update_attrs)
+  #     assert presence.week == 43
+  #   end
+
+  #   test "update_presence/2 with invalid data returns error changeset" do
+  #     presence = presence_fixture()
+  #     assert {:error, %Ecto.Changeset{}} = Attendance.update_presence(presence, @invalid_attrs)
+  #     assert presence == Attendance.get_presence!(presence.id)
+  #   end
+
+  #   test "delete_presence/1 deletes the presence" do
+  #     presence = presence_fixture()
+  #     assert {:ok, %Presence{}} = Attendance.delete_presence(presence)
+  #     assert_raise Ecto.NoResultsError, fn -> Attendance.get_presence!(presence.id) end
+  #   end
+
+  #   test "change_presence/1 returns a presence changeset" do
+  #     presence = presence_fixture()
+  #     assert %Ecto.Changeset{} = Attendance.change_presence(presence)
+  #   end
+  # end
 end
