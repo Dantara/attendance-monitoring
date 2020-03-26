@@ -1,8 +1,8 @@
 use Mix.Config
 
-config :attendance, AttendanceWeb.Endpoint,
+config :attendance_app, AttendanceAppWeb.Endpoint,
   http: [port: {:system, "PORT"}],
-  url: [scheme: "https", host: "attendance-inno.herokuapp.com", port: 443],
+  url: [scheme: "https", host: "attendance_app-inno.herokuapp.com", port: 443],
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
   secret_key_base: System.get_env("SECRET_KEY_BASE"),
   cache_static_manifest: "priv/static/cache_manifest.json",
@@ -10,7 +10,7 @@ config :attendance, AttendanceWeb.Endpoint,
 
 config :logger, level: :info
 
-config :attendance, AttendanceWeb.Repo,
+config :attendance_app, AttendanceAppWeb.Repo,
   adapter: Ecto.Adapters.Postgres,
   url: System.get_env("DATABASE_URL"),
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
