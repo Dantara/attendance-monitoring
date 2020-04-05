@@ -1,0 +1,19 @@
+<div class="row">
+    <!-- <div class="col-sm-12"> -->
+        <table>
+            <tr>
+                <th>Class name</th>
+                <th>Activity name</th>
+                <th>Week number</th>
+            </tr>
+
+            <%= for p <- @presences do %>
+            <tr>
+                <th><%= p.class.title %></th>
+                <th><%= p.activity.title %></th>
+                <th><%= p.week %></th>
+            </tr>
+            <% end %>
+        </table>
+        <!-- </div> -->
+</div>

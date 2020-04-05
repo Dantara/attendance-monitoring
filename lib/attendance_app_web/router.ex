@@ -42,7 +42,8 @@ defmodule AttendanceAppWeb.Router do
   scope "/", AttendanceAppWeb do
     pipe_through [:browser, :protected]
 
-    get "/", PageController, :index
+    # get "/", PageController, :index
+    get "/", PresenceController, :index
     delete "/logout", SessionController, :delete, as: :logout
   end
 
