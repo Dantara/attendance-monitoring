@@ -30,6 +30,18 @@ defmodule AttendanceAppWeb.Router do
       error_handler: AttendanceAppWeb.AuthErrorHandler
   end
 
+  pipeline :student do
+    plug AttendanceAppWeb.EnsureRolePlug, :student
+  end
+
+  pipeline :teacher do
+    plug AttendanceAppWeb.EnsureRolePlug, :teacher
+  end
+
+  pipeline :admin do
+    plug AttendanceAppWeb.EnsureRolePlug, :admin
+  end
+
   scope "/", AttendanceAppWeb do
     pipe_through [:browser, :not_authenticated]
 
@@ -43,8 +55,26 @@ defmodule AttendanceAppWeb.Router do
     pipe_through [:browser, :protected]
 
     # get "/", PageController, :index
-    get "/", PresenceController, :index
+    get "/", PageController, :index
     delete "/logout", SessionController, :delete, as: :logout
+  end
+
+  scope "/student", AttendanceAppWeb do
+    pipe_through [:browser, :protected, :student]
+
+    get "/", StudentController, :index
+  end
+
+  scope "/teacher", AttendanceAppWeb do
+    pipe_through [:browser, :protected, :teacher]
+
+    get "/", TeacherController, :index
+  end
+
+  scope "/admin", AttendanceAppWeb do
+    pipe_through [:browser, :protected, :admin]
+
+    get "/", AdminController, :index
   end
 
   scope "/api", AttendanceAppWeb.API do
