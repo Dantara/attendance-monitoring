@@ -14,6 +14,13 @@
         <div class='navbar'>
             <ul>
                 <li><a class="logo" href="/">Innopolis attendance monitoring system</a></li>
+                    <li><a href="/">Statistic</a></li>
+                    <li><a href="/">Enrollment</a></li>
+                    <li><a href="/">Verifing</a></li>
+                    <li><a href="/">Admin registration</a></li>
+                    <li class="right">
+                        <%= link "Logout", to: "/logout", method: :delete %>
+                    </li>
             </ul>
         </div>
         <main role="main" class="container">

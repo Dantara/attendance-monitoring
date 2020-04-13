@@ -32,14 +32,17 @@ defmodule AttendanceAppWeb.Router do
 
   pipeline :student do
     plug AttendanceAppWeb.EnsureRolePlug, :student
+    plug :put_layout, {AttendanceAppWeb.LayoutView, :student}
   end
 
   pipeline :teacher do
     plug AttendanceAppWeb.EnsureRolePlug, :teacher
+    plug :put_layout, {AttendanceAppWeb.LayoutView, :teacher}
   end
 
   pipeline :admin do
-    plug AttendanceAppWeb.EnsureRolePlug, :admin
+    plug AttendanceAppWeb.EnsureRolePlug, :administrator
+    plug :put_layout, {AttendanceAppWeb.LayoutView, :admin}
   end
 
   scope "/", AttendanceAppWeb do
@@ -71,7 +74,7 @@ defmodule AttendanceAppWeb.Router do
     get "/", TeacherController, :index
   end
 
-  scope "/admin", AttendanceAppWeb do
+  scope "/administrator", AttendanceAppWeb do
     pipe_through [:browser, :protected, :admin]
 
     get "/", AdminController, :index
