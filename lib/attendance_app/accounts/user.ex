@@ -10,6 +10,7 @@ defmodule AttendanceApp.Accounts.User do
     field :last_name, :string
     belongs_to :role, Accounts.Role
     has_many :presences, AttendanceApp.Attendance.Presence
+    many_to_many :classes, AttendanceApp.Attendance.Class, join_through: "enrollments"
 
     timestamps()
   end

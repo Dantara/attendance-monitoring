@@ -10,6 +10,7 @@
     <%= csrf_meta_tag() %>
   </head>
   <body>
+      <%#= current_user %>
       <section class="container">
               <div class="col-sm-12 title">
                   <h1>Innopolis attendance monitoring system</h1>
