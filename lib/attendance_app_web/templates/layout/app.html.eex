@@ -1,27 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>AttendanceApp Innopolis</title>
-    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
-    <link href="https://fonts.googleapis.com/css?family=Lobster&display=swap" rel="stylesheet">
-    <%= csrf_meta_tag() %>
-  </head>
-  <body>
-      <%#= current_user %>
-      <section class="container">
-              <div class="col-sm-12 title">
-                  <h1>Innopolis attendance monitoring system</h1>
-              </div>
-      </section>
-    </header>
-    <main role="main" class="container">
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-      <%= render @view_module, @view_template, assigns %>
-    </main>
-    <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
-  </body>
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>AttendanceApp Innopolis</title>
+        <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
+        <link href="https://fonts.googleapis.com/css?family=Lobster&display=swap" rel="stylesheet">
+        <%= csrf_meta_tag() %>
+    </head>
+    <body>
+        <%#= current_user %>
+        <div class='navbar'>
+            <ul>
+                <li><a class="logo" href="/">Innopolis attendance monitoring system</a></li>
+                <%= if assigns[:current_user] do %>
+                    <li><a href="/">Statistic</a></li>
+                    <li><a href="/">Enrollment</a></li>
+                    <li class="right">
+                        <%= link "Logout", to: "/logout", method: :delete %>
+                    </li>
+                <% end %>
+            </ul>
+        </div>
+        <main role="main" class="container">
+            <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+            <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+            <%= render @view_module, @view_template, assigns %>
+        </main>
+        <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+    </body>
 </html>
