@@ -8,4 +8,5 @@
     <%= password_input f, :password %>
 
     <%= submit "Log in" %>
+    <%= link " Register", to: "/signup" %>
 <% end %>
