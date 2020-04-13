@@ -47,3 +47,11 @@ body{
 .navbar li a:hover {
     background-color: #5f8056;
 }
+
+.enroll h3{
+    text-align: center;
+}
+
+.container{
+    max-width: 80%;
+}

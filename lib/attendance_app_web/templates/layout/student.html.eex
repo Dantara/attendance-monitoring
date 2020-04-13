@@ -10,12 +10,13 @@
         <%= csrf_meta_tag() %>
     </head>
     <body>
-        <%#= current_user %>
         <div class='navbar'>
             <ul>
                 <li><a class="logo" href="/">Innopolis attendance monitoring system</a></li>
                     <li><a href="/">Statistic</a></li>
-                    <li><a href="/">Enrollment</a></li>
+                    <li>
+                        <%= link "Enrollment", to: "/student/enroll" %>
+                    </li>
                     <li class="right">
                         <%= link "Logout", to: "/logout", method: :delete %>
                     </li>
