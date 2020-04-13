@@ -9,14 +9,12 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Stephen Curry</td>
-                    <td>27</td>
-                </tr>
-                <tr>
-                    <td>Klay Thompson</td>
-                    <td>25</td>
-                </tr>
+                <%= for c <- @enrolls do %>
+                    <tr>
+                        <th><%= c.title %></th>
+                        <th><%= button "Remove", to: "/enroll/#{c.id}", method: :delete, class: "button" %></th>
+                    </tr>
+                <% end %>
             </tbody>
         </table>
     </div>
@@ -30,14 +28,12 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Stephen Curry</td>
-                    <td>27</td>
-                </tr>
-                <tr>
-                    <td>Klay Thompson</td>
-                    <td>25</td>
-                </tr>
+                <%= for c <- @not_enrolls do %>
+                    <tr>
+                        <th><%= c.title %></th>
+                        <th><%= button "Enroll", to: "/enroll/#{c.id}", method: :get, class: "button" %></th>
+                    </tr>
+                <% end %>
             </tbody>
         </table>
     </div>
