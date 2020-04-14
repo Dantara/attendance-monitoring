@@ -22,4 +22,10 @@ defmodule AttendanceApp.Accounts.User do
     |> assoc_constraint(:role)
     |> validate_required([:first_name, :last_name])
   end
+
+  def changeset_update_classes(user, classes) do
+    user
+    |> cast(%{}, [:id])
+    |> put_assoc(:classes, classes)
+  end
 end

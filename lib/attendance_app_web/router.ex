@@ -67,6 +67,8 @@ defmodule AttendanceAppWeb.Router do
 
     get "/", StudentController, :index
     get "/enroll", StudentController, :enroll
+    get "/enroll/:id", StudentController, :enroll_to_class
+    delete "/enroll/:id", StudentController, :unenroll_to_class
   end
 
   scope "/teacher", AttendanceAppWeb do

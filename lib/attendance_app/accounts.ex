@@ -65,4 +65,20 @@ defmodule AttendanceApp.Accounts do
 
     Repo.all(sorted)
   end
+
+  def enroll_user(user, class_id) do
+    params = %{user_id: user.id, class_id: class_id}
+
+    IO.inspect params
+
+    Enrollment.changeset(%Enrollment{}, params)
+    |> Repo.insert()
+  end
+
+  def unenroll_user(user, class_id) do
+    query = from e in Enrollment,
+      where: e.user_id == ^user.id and e.class_id == ^class_id
+
+    Repo.delete_all(query)
+  end
 end

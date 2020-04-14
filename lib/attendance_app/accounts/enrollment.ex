@@ -12,7 +12,7 @@ defmodule AttendanceApp.Accounts.Enrollment do
   @doc false
   def changeset(enrollment, attrs) do
     enrollment
-    |> cast(attrs, [])
-    |> validate_required([])
+    |> cast(attrs, [:user_id, :class_id])
+    |> validate_required([:user_id, :class_id])
   end
 end
