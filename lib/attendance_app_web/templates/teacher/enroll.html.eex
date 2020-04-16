@@ -1,0 +1,40 @@
+<div class="enroll row">
+    <div class="column column-50">
+        <h3>Enrolled courses</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <%= for c <- @enrolls do %>
+                    <tr>
+                        <th><%= c.title %></th>
+                        <th><%= button "Unenroll", to: "/teacher/enroll/#{c.id}", method: :delete, class: "button" %></th>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+    <div class="column column-50">
+        <h3>Enroll to the new course</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <%= for c <- @not_enrolls do %>
+                    <tr>
+                        <th><%= c.title %></th>
+                        <th><%= button "Enroll", to: "/teacher/enroll/#{c.id}", method: :get, class: "button" %></th>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+</div>

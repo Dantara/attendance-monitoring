@@ -67,12 +67,15 @@ defmodule AttendanceApp.Accounts do
   end
 
   def enroll_user(user, class_id) do
-    params = %{user_id: user.id, class_id: class_id}
+    query = from e in Enrollment,
+      where: e.user_id == ^user.id and e.class_id == ^class_id
 
-    IO.inspect params
+    if not Repo.exists?(query) do
+      params = %{user_id: user.id, class_id: class_id}
 
-    Enrollment.changeset(%Enrollment{}, params)
-    |> Repo.insert()
+      Enrollment.changeset(%Enrollment{}, params)
+      |> Repo.insert()
+    end
   end
 
   def unenroll_user(user, class_id) do

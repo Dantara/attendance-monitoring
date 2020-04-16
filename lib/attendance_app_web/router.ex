@@ -75,6 +75,9 @@ defmodule AttendanceAppWeb.Router do
     pipe_through [:browser, :protected, :teacher]
 
     get "/", TeacherController, :index
+    get "/enroll", TeacherController, :enroll
+    get "/enroll/:id", TeacherController, :enroll_to_class
+    delete "/enroll/:id", TeacherController, :unenroll_to_class
   end
 
   scope "/administrator", AttendanceAppWeb do
