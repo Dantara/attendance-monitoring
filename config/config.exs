@@ -14,6 +14,9 @@ config :attendance_app,
 config :attendance_app, AttendanceAppWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "D/9wr5U0c7pRp9v6btiPjMsfnRdlYpajDkGdaCh0bmr7dhKk8LI3E2Zz7NQVc+sq",
+  live_view: [
+    signing_salt: "D/9wr5U0c7pRp9v6btiPjMsfnRdlYpajDkGdaCh0bmr7dhKk8LI3E2Zz7NQVc+sq"
+  ],
   render_errors: [view: AttendanceAppWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: AttendanceApp.PubSub, adapter: Phoenix.PubSub.PG2]
 
@@ -23,7 +26,9 @@ config :logger, :console,
   metadata: [:request_id]
 
 # Use Jason for JSON parsing in Phoenix
-config :phoenix, :json_library, Jason
+config :phoenix,
+  json_library: Jason,
+  template_engines: [leex: Phoenix.LiveView.Engine]
 
 config :attendance_app, :pow,
   user: AttendanceApp.Accounts.User,

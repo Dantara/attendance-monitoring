@@ -3,7 +3,8 @@ defmodule AttendanceAppWeb.StudentController do
   alias AttendanceApp.Accounts
 
   def index(conn, _params) do
-    render(conn, "index.html")
+    # render(conn, "index.html")
+      live_render(conn, AttendanceAppWeb.Live.StudentView, session: %{})
   end
 
   def enroll(conn, _params) do

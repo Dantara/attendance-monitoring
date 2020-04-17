@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="column column-25">
+    <h4>Dispay mode:</h4>
+    <form phx-change="select_mode">
+      <select name="mode" id="mode">
+        <%= for m <- @modes do %>
+            <option value="<%= m.value %>"
+                    <%= selected_attr(@mode, m.value) %>
+                    >
+              <%= m.text %>
+            </option>
+            <% end %>
+      </select>
+
+    </form>
+  </div>
+  <div class="column column-75">
+    <%= render @right_render, assigns %>
+  </div>
+</div>

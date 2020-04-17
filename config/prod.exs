@@ -3,6 +3,9 @@ use Mix.Config
 config :attendance_app, AttendanceAppWeb.Endpoint,
   http: [port: {:system, "PORT"}],
   url: [scheme: "https", host: "attendance_app-inno.herokuapp.com", port: 443],
+  live_view: [
+    signing_salt: System.get_env("SECRET_KEY_BASE")
+  ].
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
   secret_key_base: System.get_env("SECRET_KEY_BASE"),
   cache_static_manifest: "priv/static/cache_manifest.json",
