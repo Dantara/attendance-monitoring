@@ -1,5 +1,5 @@
 <div class="row">
-  <%= if length(@classes) == 0 do%>
+  <%= if length(@classes) == 0 do %>
   <div class="column error">
     <h2> You have no enrolled courses</h3>
 <p>
@@ -20,7 +20,7 @@
           <% end %>
     </select>
   </form>
-  <%= if @mode == "detailed" do%>
+  <%= if @mode == "detailed" do %>
   <form phx-change="select_class">
     <label>Course title</label>
     <select name="class" id="class">
