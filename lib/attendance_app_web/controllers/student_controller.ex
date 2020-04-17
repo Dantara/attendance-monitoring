@@ -4,7 +4,11 @@ defmodule AttendanceAppWeb.StudentController do
 
   def index(conn, _params) do
     # render(conn, "index.html")
-      live_render(conn, AttendanceAppWeb.Live.StudentView, session: %{})
+    current_user = Pow.Plug.current_user(conn)
+    enrolls = Accounts.user_enrolls(current_user)
+
+    live_render(conn, AttendanceAppWeb.Live.StudentView,
+      session: %{"user" => current_user, "classes" => enrolls})
   end
 
   def enroll(conn, _params) do

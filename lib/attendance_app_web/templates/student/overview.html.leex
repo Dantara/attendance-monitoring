@@ -1,1 +1,17 @@
-<h1>Overview</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Attendance points</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for o <- @overview do %>
+        <tr>
+          <th><%= o.title %></th>
+          <th><%= o.points %></th>
+        </tr>
+        <% end %>
+  </tbody>
+</table>
+

@@ -1,20 +1,43 @@
 <div class="row">
-  <div class="column column-25">
-    <h4>Dispay mode:</h4>
-    <form phx-change="select_mode">
-      <select name="mode" id="mode">
-        <%= for m <- @modes do %>
-            <option value="<%= m.value %>"
-                    <%= selected_attr(@mode, m.value) %>
-                    >
-              <%= m.text %>
-            </option>
-            <% end %>
-      </select>
+  <%= if length(@classes) == 0 do%>
+  <div class="column error">
+    <h2> You have no enrolled courses</h3>
+<p>
+  Please visit "Enrollment" page and select courses
+</p>
+</div>
+<%= else %>
+<div class="column column-25">
+  <form phx-change="select_mode">
+    <label>Mode</label>
+    <select name="mode" id="mode">
+      <%= for m <- @modes do %>
+          <option value="<%= m.value %>"
+                  <%= selected_attr(@mode, m.value) %>
+                  >
+            <%= m.text %>
+          </option>
+          <% end %>
+    </select>
+  </form>
+  <%= if @mode == "detailed" do%>
+  <form phx-change="select_class">
+    <label>Course title</label>
+    <select name="class" id="class">
+      <%= for c <- @classes do %>
+          <option value="<%= c.id %>"
+                  <%= selected_attr(@class_id, c.id) %>
+                  >
+            <%= c.title %>
+          </option>
+          <% end %>
 
-    </form>
-  </div>
-  <div class="column column-75">
-    <%= render @right_render, assigns %>
-  </div>
+    </select>
+  </form>
+  <% end %>
+</div>
+<div class="column column-65 column-offset-10">
+  <%= render @right_render, assigns %>
+</div>
+<% end %>
 </div>

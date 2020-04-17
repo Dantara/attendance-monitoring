@@ -1,1 +1,16 @@
-<h1>Detailed view</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Activity</th>
+      <th>Week</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for d <- @detailed do %>
+        <tr>
+          <th><%= d.activity.title %></th>
+          <th><%= d.week %></th>
+        </tr>
+        <% end %>
+  </tbody>
+</table>

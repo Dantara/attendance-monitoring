@@ -34,17 +34,13 @@ defmodule AttendanceApp.Accounts do
   end
 
   def user_enrolls(user) do
-    # %{classes: enrolls} =
-    #   user
     user_enrolls_query =
       from u in User,
       where: u.id == ^user.id,
       join: c in assoc(u, :classes),
       select: %{id: c.id, title: c.title},
       order_by: [{:asc, c.title}]
-      # |> Repo.preload(:classes)
 
-    # enrolls
     Repo.all(user_enrolls_query)
   end
 

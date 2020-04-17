@@ -55,3 +55,9 @@ body{
 .container{
     max-width: 80%;
 }
+.error{
+    text-align: center;
+}
+form{
+    margin-bottom: 0;
+}
