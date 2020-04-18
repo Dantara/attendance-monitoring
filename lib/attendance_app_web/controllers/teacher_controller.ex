@@ -3,7 +3,11 @@ defmodule AttendanceAppWeb.TeacherController do
   alias AttendanceApp.Accounts
 
   def index(conn, _params) do
-    render(conn, "index.html")
+    current_user = Pow.Plug.current_user(conn)
+    enrolls = Accounts.user_enrolls(current_user)
+
+    live_render(conn, AttendanceAppWeb.Live.TeacherView,
+      session: %{"user" => current_user, "classes" => enrolls})
   end
 
   def enroll(conn, _params) do
