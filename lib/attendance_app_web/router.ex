@@ -104,5 +104,7 @@ defmodule AttendanceAppWeb.Router do
     resources "/classes", ClassController, except: [:new, :edit]
     resources "/presences", PresenceController, except: [:new, :edit]
     get "/user_presences", PresenceController, :user_presences
+    get "/user_classes", ClassController, :user_classes
+    get "/class_students/:id", UserController, :class_students
   end
 end

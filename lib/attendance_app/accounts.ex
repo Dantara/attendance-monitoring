@@ -98,5 +98,6 @@ defmodule AttendanceApp.Accounts do
       order_by: [{:asc, :title}]
 
     Repo.all(students)
+    |> Repo.preload([:role, :classes])
   end
 end

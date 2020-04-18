@@ -2,7 +2,9 @@ defmodule AttendanceAppWeb.API.ClassController do
   use AttendanceAppWeb, :controller
 
   alias AttendanceApp.Attendance
+  alias AttendanceApp.Accounts
   alias AttendanceApp.Attendance.Class
+  alias AttendanceApp.Repo
 
   action_fallback AttendanceAppWeb.FallbackController
 
@@ -39,5 +41,14 @@ defmodule AttendanceAppWeb.API.ClassController do
     with {:ok, %Class{}} <- Attendance.delete_class(class) do
       send_resp(conn, :no_content, "")
     end
+  end
+
+  def user_classes(conn, _params) do
+    current_user =
+      Pow.Plug.current_user(conn)
+      |> Repo.preload([:role, :classes])
+
+    %{classes: classes} = current_user
+    render(conn, "index.json", classes: classes)
   end
 end
