@@ -2,7 +2,7 @@ use Mix.Config
 
 config :attendance_app, AttendanceAppWeb.Endpoint,
   http: [port: {:system, "PORT"}],
-  url: [scheme: "https", host: "attendance_app-inno.herokuapp.com", port: 443],
+  url: [scheme: "https", host: "attendance-inno.herokuapp.com", port: 443],
   live_view: [
     signing_salt: System.get_env("SECRET_KEY_BASE")
   ],
@@ -10,7 +10,7 @@ config :attendance_app, AttendanceAppWeb.Endpoint,
   secret_key_base: System.get_env("SECRET_KEY_BASE"),
   cache_static_manifest: "priv/static/cache_manifest.json",
   server: true,
-  check_origin: ["attendance_app-inno.herokuapp.com"]
+  check_origin: ["https://attendance-inno.herokuapp.com"]
 
 config :logger, level: :info
 
