@@ -31,7 +31,19 @@
             <%= c.title %>
           </option>
           <% end %>
+    </select>
+  </form>
 
+  <form phx-change="select_student">
+    <label>Student name</label>
+    <select name="student" id="student">
+      <%= for s <- @students do %>
+          <option value="<%= s.id %>"
+                  <%= selected_attr(@student_id, s.id) %>
+                  >
+            <%= fullname(s.first_name, s.last_name) %>
+          </option>
+          <% end %>
     </select>
   </form>
   <% end %>

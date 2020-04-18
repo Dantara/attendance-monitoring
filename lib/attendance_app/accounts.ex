@@ -7,6 +7,8 @@ defmodule AttendanceApp.Accounts do
   alias AttendanceApp.Attendance.Class
   alias AttendanceApp.Accounts.User
 
+  def get_user!(id), do: Repo.get!(User, id)
+
   def list_roles do
     Repo.all(Role)
   end
@@ -56,7 +58,7 @@ defmodule AttendanceApp.Accounts do
       select: %{id: c.id, title: c.title}
 
     sorted = except(all_classes, ^user_enrolls_query)
-      from s in subquery(sorted),
+    from s in subquery(sorted),
       order_by: [{:asc, :title}]
 
     Repo.all(sorted)
@@ -79,5 +81,22 @@ defmodule AttendanceApp.Accounts do
       where: e.user_id == ^user.id and e.class_id == ^class_id
 
     Repo.delete_all(query)
+  end
+
+  def course_students(class_id) do
+    users = from u in User,
+      join: c in assoc(u, :classes),
+      where: c.id == ^class_id
+
+    staff = from u in User,
+      join: c in assoc(u, :classes),
+      join: r in assoc(u, :role),
+      where: r.title == "Administrator" or r.title == "Teacher"
+
+    students = except(users, ^staff)
+    from s in subquery(students),
+      order_by: [{:asc, :title}]
+
+    Repo.all(students)
   end
 end
