@@ -24,6 +24,7 @@ defmodule AttendanceAppWeb do
       import Plug.Conn
       import AttendanceAppWeb.Gettext
       alias AttendanceAppWeb.Router.Helpers, as: Routes
+      import Phoenix.LiveView.Controller
     end
   end
 
@@ -42,6 +43,7 @@ defmodule AttendanceAppWeb do
       import AttendanceAppWeb.ErrorHelpers
       import AttendanceAppWeb.Gettext
       alias AttendanceAppWeb.Router.Helpers, as: Routes
+      # import Phoenix.LiveView, only: [live_render: 2, live_render: 3]
     end
   end
 
@@ -50,6 +52,7 @@ defmodule AttendanceAppWeb do
       use Phoenix.Router
       import Plug.Conn
       import Phoenix.Controller
+      import Phoenix.LiveView.Router
     end
   end
 

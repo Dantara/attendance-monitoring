@@ -3,6 +3,7 @@ defmodule AttendanceApp.Attendance do
   alias AttendanceApp.Repo
 
   alias AttendanceApp.Attendance.Activity
+  alias AttendanceApp.Accounts
 
   def list_activities do
     Repo.all(Activity)
@@ -100,5 +101,41 @@ defmodule AttendanceApp.Attendance do
 
     Repo.all(query)
     |> Repo.preload([{:user, :role}, :class, :activity])
+  end
+
+  def student_overview(user) do
+    classes = Accounts.user_enrolls(user)
+
+    Enum.map(classes, fn c -> student_overview_mapper(c, user) end)
+  end
+
+  def teacher_overview(user) do
+    classes = Accounts.user_enrolls(user)
+
+    Enum.map(classes, fn c -> teacher_overview_mapper c end)
+  end
+
+  def student_class_presences(user, class_id) do
+    query = from p in Presence,
+      where: p.user_id == ^user.id and p.class_id == ^class_id
+
+    Repo.all(query)
+    |> Repo.preload([{:user, :role}, :class, :activity])
+  end
+
+  defp student_overview_mapper(class, user) do
+    query = from p in Presence,
+      where: p.user_id == ^user.id and p.class_id == ^class.id,
+      select: count(p.id)
+
+    %{id: class.id, title: class.title, points: Repo.one(query)}
+  end
+
+  defp teacher_overview_mapper(class) do
+    query = from p in Presence,
+      where: p.class_id == ^class.id,
+      select: count(p.id)
+
+    %{id: class.id, title: class.title, points: Repo.one(query)}
   end
 end

@@ -5,7 +5,7 @@ defmodule AttendanceApp.Attendance.Class do
   schema "classes" do
     field :title, :string
     has_many :presences, AttendanceApp.Attendance.Presence
-    many_to_many :users, AttendanceApp.Attendance.User, join_through: "enrollments"
+    many_to_many :users, AttendanceApp.Accounts.User, join_through: "enrollments"
 
     timestamps()
   end
