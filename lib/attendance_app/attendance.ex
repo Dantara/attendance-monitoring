@@ -63,24 +63,24 @@ defmodule AttendanceApp.Attendance do
 
   def list_presences do
     Repo.all(Presence)
-    |> Repo.preload([{:user, :role}, :class, :activity])
+    |> Repo.preload([{:user, :role}, {:user, :classes}, :class, :activity])
   end
 
   def get_presence!(id) do
     Repo.get!(Presence, id)
-    |> Repo.preload([{:user, :role}, :class, :activity])
+    |> Repo.preload([{:user, :role}, {:user, :classes}, :class, :activity])
   end
 
   def create_presence(attrs \\ %{}) do
     %Presence{}
-    |> Repo.preload([{:user, :role}, :class, :activity])
+    |> Repo.preload([{:user, :role}, {:user, :classes}, :class, :activity])
     |> Presence.changeset(attrs)
     |> Repo.insert()
   end
 
   def update_presence(%Presence{} = presence, attrs) do
     presence
-    |> Repo.preload([{:user, :role}, :class, :activity])
+    |> Repo.preload([{:user, :role}, {:user, :classes}, :class, :activity])
     |> Presence.changeset(attrs)
     |> Repo.update()
   end
@@ -91,7 +91,7 @@ defmodule AttendanceApp.Attendance do
 
   def change_presence(%Presence{} = presence) do
     presence
-    |> Repo.preload([{:user, :role}, :class, :activity])
+    |> Repo.preload([{:user, :role}, {:user, :classes}, :class, :activity])
     |> Presence.changeset(%{})
   end
 
@@ -100,7 +100,7 @@ defmodule AttendanceApp.Attendance do
     query = from p in Presence, where: p.user_id == type(^id, :integer)
 
     Repo.all(query)
-    |> Repo.preload([{:user, :role}, :class, :activity])
+    |> Repo.preload([{:user, :role}, {:user, :classes}, :class, :activity])
   end
 
   def student_overview(user) do
@@ -120,7 +120,7 @@ defmodule AttendanceApp.Attendance do
       where: p.user_id == ^user.id and p.class_id == ^class_id
 
     Repo.all(query)
-    |> Repo.preload([{:user, :role}, :class, :activity])
+    |> Repo.preload([{:user, :role}, {:user, :classes}, :class, :activity])
   end
 
   defp student_overview_mapper(class, user) do
