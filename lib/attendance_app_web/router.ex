@@ -85,6 +85,7 @@ defmodule AttendanceAppWeb.Router do
     pipe_through [:browser, :protected, :admin]
 
     get "/", AdminController, :index
+    get "/enroll", AdminController, :enroll
   end
 
   scope "/api", AttendanceAppWeb.API do

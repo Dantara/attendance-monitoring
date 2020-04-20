@@ -8,4 +8,9 @@ defmodule AttendanceAppWeb.AdminController do
     live_render(conn, AttendanceAppWeb.Live.AdminView,
       session: %{"classes" => classes})
   end
+
+  def enroll(conn, _params) do
+    live_render(conn, AttendanceAppWeb.Live.AdminEnroll,
+    session: %{})
+  end
 end

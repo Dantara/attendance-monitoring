@@ -14,7 +14,9 @@
             <ul>
                 <li><a class="logo" href="/">Innopolis attendance monitoring system</a></li>
                     <li><a href="/">Statistic</a></li>
-                    <li><a href="/">Enrollment</a></li>
+                    <li>
+                        <%= link "Enrollment", to: "/administrator/enroll" %>
+                    </li>
                     <li><a href="/">Verifing</a></li>
                     <li><a href="/">Admin registration</a></li>
                     <li class="right">

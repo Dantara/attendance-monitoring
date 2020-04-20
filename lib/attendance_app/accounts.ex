@@ -9,6 +9,24 @@ defmodule AttendanceApp.Accounts do
 
   def get_user!(id), do: Repo.get!(User, id)
 
+  def list_students do
+    query = from u in User,
+      join: r in assoc(u, :role),
+      where: r.title == "Student"
+
+    Repo.all(query)
+    |> Repo.preload([:role, :classes])
+  end
+
+  def list_teachers do
+    query = from u in User,
+      join: r in assoc(u, :role),
+      where: r.title == "Teacher"
+
+    Repo.all(query)
+    |> Repo.preload([:role, :classes])
+  end
+
   def list_roles do
     Repo.all(Role)
   end

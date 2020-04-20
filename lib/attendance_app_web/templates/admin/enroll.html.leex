@@ -1,0 +1,91 @@
+<div class="row">
+  <div class="column column-50 column-offset-25">
+    <form phx-change="select_role">
+      <label>Select role</label>
+      <select name="role" id="role">
+        <%= for r <- @roles do %>
+            <option value="<%= r.value %>"
+                    <%= selected_attr(@role, r.value) %>
+                    >
+              <%= r.text %>
+            </option>
+            <% end %>
+      </select>
+    </form>
+    <%= if @role == "student" do%>
+    <form phx-change="select_student">
+      <label>Student name</label>
+      <select name="student" id="student">
+        <%= for s <- @students do %>
+            <option value="<%= s.id %>"
+                    <%= selected_attr(@student_id, s.id) %>
+                    >
+              <%= fullname(s.first_name, s.last_name) %>
+            </option>
+            <% end %>
+      </select>
+    </form>
+    <% else %>
+    <form phx-change="select_teacher">
+      <label>Teacher name</label>
+      <select name="teacher" id="teacher">
+        <%= for t <- @teachers do %>
+            <option value="<%= t.id %>"
+                    <%= selected_attr(@teacher_id, t.id) %>
+                    >
+              <%= fullname(t.first_name, t.last_name) %>
+            </option>
+            <% end %>
+      </select>
+    </form>
+    <% end %>
+  </div>
+</div>
+<div class="enroll row">
+  <div class="column column-50">
+    <h3>Enrolled courses</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= for c <- @enrolls do %>
+            <tr>
+              <th><%= c.title %></th>
+              <th>
+                <button phx-value-class_id="<%= c.id %>" phx-click="unenroll">
+                  Unenroll
+                </button>
+              </th>
+            </tr>
+            <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="column column-50">
+    <h3>Enroll to the new course</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= for c <- @not_enrolls do %>
+            <tr>
+              <th><%= c.title %></th>
+              <th>
+                <button phx-value-class_id="<%= c.id %>" phx-click="enroll">
+                  Enroll
+                </button>
+              </th>
+            </tr>
+            <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
