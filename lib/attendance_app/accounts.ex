@@ -118,4 +118,54 @@ defmodule AttendanceApp.Accounts do
     Repo.all(students)
     |> Repo.preload([:role, :classes])
   end
+
+  def verify_user_by_id(user_id) do
+    params = %{verified: true}
+
+    user = get_user!(user_id)
+
+    User.changeset_verifing(user, params)
+    |> Repo.update()
+  end
+
+  def unverify_user_by_id(user_id) do
+    params = %{verified: false}
+
+    user = get_user!(user_id)
+
+    User.changeset_verifing(user, params)
+    |> Repo.update()
+  end
+
+  def verified_students do
+    query = from u in User,
+      join: r in assoc(u, :role),
+      where: u.verified == true and r.title == "Student"
+
+    Repo.all(query)
+  end
+
+  def not_verified_students do
+    query = from u in User,
+      join: r in assoc(u, :role),
+      where: u.verified == false and r.title == "Student"
+
+    Repo.all(query)
+  end
+
+  def verified_teachers do
+    query = from u in User,
+      join: r in assoc(u, :role),
+      where: u.verified == true and r.title == "Teacher"
+
+    Repo.all(query)
+  end
+
+  def not_verified_teachers do
+    query = from u in User,
+      join: r in assoc(u, :role),
+      where: u.verified == false and r.title == "Teacher"
+
+    Repo.all(query)
+  end
 end

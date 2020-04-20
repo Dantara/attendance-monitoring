@@ -17,7 +17,9 @@
                     <li>
                         <%= link "Enrollment", to: "/administrator/enroll" %>
                     </li>
-                    <li><a href="/">Verifing</a></li>
+                    <li>
+                        <%= link "Verifing", to: "/administrator/verifing" %>
+                    </li>
                     <li><a href="/">Admin registration</a></li>
                     <li class="right">
                         <%= link "Logout", to: "/logout", method: :delete %>

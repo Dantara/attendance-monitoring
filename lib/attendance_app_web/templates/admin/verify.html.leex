@@ -1,0 +1,65 @@
+<div class="row">
+  <div class="column column-50 column-offset-25">
+    <form phx-change="select_role">
+      <label>Select role</label>
+      <select name="role" id="role">
+        <%= for r <- @roles do %>
+            <option value="<%= r.value %>"
+                    <%= selected_attr(@role, r.value) %>
+                    >
+              <%= r.text %>
+            </option>
+            <% end %>
+      </select>
+    </form>
+  </div>
+</div>
+<br/>
+<div class="enroll row">
+  <div class="column column-50">
+    <h3>Verified</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= for u <- @verified do %>
+            <tr>
+              <th><%= fullname(u.first_name, u.last_name) %></th>
+              <th>
+                <button phx-value-user_id="<%= u.id %>" phx-click="unverify">
+                  Unverify
+                </button>
+              </th>
+            </tr>
+            <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="column column-50">
+    <h3>Not verified</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= for u <- @not_verified do %>
+            <tr>
+              <th><%= fullname(u.first_name, u.last_name) %></th>
+              <th>
+                <button phx-value-user_id="<%= u.id %>" phx-click="verify">
+                  Verify
+                </button>
+              </th>
+            </tr>
+            <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

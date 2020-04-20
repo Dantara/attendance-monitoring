@@ -86,6 +86,7 @@ defmodule AttendanceAppWeb.Router do
 
     get "/", AdminController, :index
     get "/enroll", AdminController, :enroll
+    get "/verifing", AdminController, :verifing
   end
 
   scope "/api", AttendanceAppWeb.API do
