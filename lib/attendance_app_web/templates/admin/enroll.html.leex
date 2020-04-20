@@ -12,7 +12,7 @@
             <% end %>
       </select>
     </form>
-    <%= if @role == "student" do%>
+    <%= if @role == "student" do %>
     <form phx-change="select_student">
       <label>Student name</label>
       <select name="student" id="student">
