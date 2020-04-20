@@ -1,5 +1,5 @@
 defmodule AttendanceAppWeb.Live.AdminEnroll do
-  use Phoenix.LiveView
+  use Phoenix.LiveView, view: AttendanceAppWeb.AdminView
   alias AttendanceAppWeb.AdminView
   alias AttendanceApp.Attendance
   alias AttendanceApp.Accounts

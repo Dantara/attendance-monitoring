@@ -5,7 +5,7 @@ defmodule AttendanceAppWeb.AdminController do
   def index(conn, _params) do
     classes = Attendance.list_classes
 
-    live_render(conn, AttendanceAppWeb.Live.AdminView,
+    live_render(conn, AttendanceAppWeb.Live.AdminStatistic,
       session: %{"classes" => classes})
   end
 

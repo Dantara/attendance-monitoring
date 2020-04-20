@@ -6,7 +6,7 @@ defmodule AttendanceAppWeb.TeacherController do
     current_user = Pow.Plug.current_user(conn)
     enrolls = Accounts.user_enrolls(current_user)
 
-    live_render(conn, AttendanceAppWeb.Live.TeacherView,
+    live_render(conn, AttendanceAppWeb.Live.TeacherStatistic,
       session: %{"user" => current_user, "classes" => enrolls})
   end
 

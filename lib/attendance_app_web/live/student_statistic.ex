@@ -1,4 +1,4 @@
-defmodule AttendanceAppWeb.Live.StudentView do
+defmodule AttendanceAppWeb.Live.StudentStatistic do
   use Phoenix.LiveView
   alias AttendanceAppWeb.StudentView
   alias AttendanceApp.Attendance

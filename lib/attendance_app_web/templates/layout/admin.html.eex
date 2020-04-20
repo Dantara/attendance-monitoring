@@ -20,7 +20,9 @@
                     <li>
                         <%= link "Verifing", to: "/administrator/verifing" %>
                     </li>
-                    <li><a href="/">Admin registration</a></li>
+                    <li>
+                        <%= link "Admin registration", to: "/administrator/registration" %>
+                    </li>
                     <li class="right">
                         <%= link "Logout", to: "/logout", method: :delete %>
                     </li>

@@ -53,6 +53,20 @@ defmodule AttendanceApp.Accounts do
     Role.changeset(role, %{})
   end
 
+  def get_admin_role do
+    query = from r in Role,
+      where: r.title == "Administrator"
+
+    Repo.one(query)
+  end
+
+  def roles_without_admin do
+    query = from r in Role,
+      where: r.title != "Administrator"
+
+    Repo.all(query)
+  end
+
   def user_enrolls(user) do
     user_enrolls_query =
       from u in User,

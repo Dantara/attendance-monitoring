@@ -81,12 +81,14 @@ defmodule AttendanceAppWeb.Router do
     delete "/enroll/:id", TeacherController, :unenroll_to_class
   end
 
-  scope "/administrator", AttendanceAppWeb do
+  scope "/administrator", AttendanceAppWeb, as: :admin do
     pipe_through [:browser, :protected, :admin]
 
     get "/", AdminController, :index
     get "/enroll", AdminController, :enroll
     get "/verifing", AdminController, :verifing
+    get "/registration", RegistrationController, :new_admin
+    post "/registration", RegistrationController, :create_admin
   end
 
   scope "/api", AttendanceAppWeb.API do
