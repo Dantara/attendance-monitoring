@@ -31,7 +31,7 @@ defmodule AttendanceAppWeb.Live.AdminEnroll do
     enrolls = students |> first_el |> get_enrolls
     not_enrolls = students |> first_el |> get_not_enrolls
 
-    {:noreply, assign(socket, %{role: "students",
+    {:noreply, assign(socket, %{role: "student",
                                 enrolls: enrolls, not_enrolls: not_enrolls})}
   end
 
