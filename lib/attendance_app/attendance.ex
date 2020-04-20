@@ -115,6 +115,12 @@ defmodule AttendanceApp.Attendance do
     Enum.map(classes, fn c -> teacher_overview_mapper c end)
   end
 
+  def admin_overview do
+    classes = Repo.all(Class)
+
+    Enum.map(classes, fn c -> teacher_overview_mapper c end)
+  end
+
   def student_class_presences(user, class_id) do
     query = from p in Presence,
       where: p.user_id == ^user.id and p.class_id == ^class_id

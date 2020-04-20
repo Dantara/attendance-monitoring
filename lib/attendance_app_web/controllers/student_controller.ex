@@ -3,7 +3,6 @@ defmodule AttendanceAppWeb.StudentController do
   alias AttendanceApp.Accounts
 
   def index(conn, _params) do
-    # render(conn, "index.html")
     current_user = Pow.Plug.current_user(conn)
     enrolls = Accounts.user_enrolls(current_user)
 

@@ -1,9 +1,9 @@
 <div class="row">
   <%= if length(@classes) == 0 do %>
   <div class="column error">
-    <h2> You have no enrolled courses</h2>
+    <h2>There are no classes in the system</h2>
 <p>
-  Please visit "Enrollment" page and select courses
+  Please add classes and refresh the page.
 </p>
 </div>
 <% else %>
@@ -31,7 +31,19 @@
             <%= c.title %>
           </option>
           <% end %>
+    </select>
+  </form>
 
+  <form phx-change="select_student">
+    <label>Student name</label>
+    <select name="student" id="student">
+      <%= for s <- @students do %>
+          <option value="<%= s.id %>"
+                  <%= selected_attr(@student_id, s.id) %>
+                  >
+            <%= fullname(s.first_name, s.last_name) %>
+          </option>
+          <% end %>
     </select>
   </form>
   <% end %>
