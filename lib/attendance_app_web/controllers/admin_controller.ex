@@ -14,8 +14,8 @@ defmodule AttendanceAppWeb.AdminController do
     session: %{})
   end
 
-  def verifing(conn, _params) do
-    live_render(conn, AttendanceAppWeb.Live.AdminVerify,
+  def blocking(conn, _params) do
+    live_render(conn, AttendanceAppWeb.Live.AdminBlock,
       session: %{})
   end
 end

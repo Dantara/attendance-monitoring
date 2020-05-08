@@ -11,7 +11,7 @@ defmodule AttendanceApp.Accounts.User do
     belongs_to :role, Accounts.Role
     has_many :presences, AttendanceApp.Attendance.Presence
     many_to_many :classes, AttendanceApp.Attendance.Class, join_through: "enrollments"
-    field :verified, :boolean
+    field :blocked, :boolean
 
     timestamps()
   end
@@ -32,7 +32,7 @@ defmodule AttendanceApp.Accounts.User do
 
   def changeset_verifing(user, params) do
     user
-    |> cast(params, [:verified])
-    |> validate_required([:verified])
+    |> cast(params, [:blocked])
+    |> validate_required([:blocked])
   end
 end

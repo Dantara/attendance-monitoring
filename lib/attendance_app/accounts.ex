@@ -133,8 +133,8 @@ defmodule AttendanceApp.Accounts do
     |> Repo.preload([:role, :classes])
   end
 
-  def verify_user_by_id(user_id) do
-    params = %{verified: true}
+  def block_user_by_id(user_id) do
+    params = %{blocked: true}
 
     user = get_user!(user_id)
 
@@ -142,8 +142,8 @@ defmodule AttendanceApp.Accounts do
     |> Repo.update()
   end
 
-  def unverify_user_by_id(user_id) do
-    params = %{verified: false}
+  def unblock_user_by_id(user_id) do
+    params = %{blocked: false}
 
     user = get_user!(user_id)
 
@@ -151,34 +151,34 @@ defmodule AttendanceApp.Accounts do
     |> Repo.update()
   end
 
-  def verified_students do
+  def blocked_students do
     query = from u in User,
       join: r in assoc(u, :role),
-      where: u.verified == true and r.title == "Student"
+      where: u.blocked == true and r.title == "Student"
 
     Repo.all(query)
   end
 
-  def not_verified_students do
+  def not_blocked_students do
     query = from u in User,
       join: r in assoc(u, :role),
-      where: u.verified == false and r.title == "Student"
+      where: u.blocked == false and r.title == "Student"
 
     Repo.all(query)
   end
 
-  def verified_teachers do
+  def blocked_teachers do
     query = from u in User,
       join: r in assoc(u, :role),
-      where: u.verified == true and r.title == "Teacher"
+      where: u.blocked == true and r.title == "Teacher"
 
     Repo.all(query)
   end
 
-  def not_verified_teachers do
+  def not_blocked_teachers do
     query = from u in User,
       join: r in assoc(u, :role),
-      where: u.verified == false and r.title == "Teacher"
+      where: u.blocked == false and r.title == "Teacher"
 
     Repo.all(query)
   end

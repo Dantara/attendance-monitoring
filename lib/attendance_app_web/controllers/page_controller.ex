@@ -8,10 +8,16 @@ defmodule AttendanceAppWeb.PageController do
       Pow.Plug.current_user(conn)
       |> Repo.preload(:role)
 
-    redirect_path =
-      "/#{current_user.role.title}/"
-      |> String.downcase
+    case current_user do
+      %{blocked: true} ->
+        redirect(conn, to: "/blocked/")
 
-    redirect(conn, to: redirect_path)
+      _ ->
+        redirect_path =
+          "/#{current_user.role.title}/"
+          |> String.downcase
+
+        redirect(conn, to: redirect_path)
+    end
   end
 end

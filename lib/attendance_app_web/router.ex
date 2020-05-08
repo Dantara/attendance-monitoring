@@ -46,6 +46,15 @@ defmodule AttendanceAppWeb.Router do
     plug :put_layout, {AttendanceAppWeb.LayoutView, :admin}
   end
 
+  pipeline :blocked do
+    plug AttendanceAppWeb.EnsureBlockPlug, true
+    plug :put_layout, {AttendanceAppWeb.LayoutView, :blocked}
+  end
+
+  pipeline :not_blocked do
+    plug AttendanceAppWeb.EnsureBlockPlug, false
+  end
+
   scope "/", AttendanceAppWeb do
     pipe_through [:browser, :not_authenticated]
 
@@ -64,7 +73,7 @@ defmodule AttendanceAppWeb.Router do
   end
 
   scope "/student", AttendanceAppWeb do
-    pipe_through [:browser, :protected, :student]
+    pipe_through [:browser, :protected, :student, :not_blocked]
 
     get "/", StudentController, :index
     get "/enroll", StudentController, :enroll
@@ -73,7 +82,7 @@ defmodule AttendanceAppWeb.Router do
   end
 
   scope "/teacher", AttendanceAppWeb do
-    pipe_through [:browser, :protected, :teacher]
+    pipe_through [:browser, :protected, :teacher, :not_blocked]
 
     get "/", TeacherController, :index
     get "/enroll", TeacherController, :enroll
@@ -82,13 +91,19 @@ defmodule AttendanceAppWeb.Router do
   end
 
   scope "/administrator", AttendanceAppWeb, as: :admin do
-    pipe_through [:browser, :protected, :admin]
+    pipe_through [:browser, :protected, :admin, :not_blocked]
 
     get "/", AdminController, :index
     get "/enroll", AdminController, :enroll
-    get "/verifing", AdminController, :verifing
+    get "/blocking", AdminController, :blocking
     get "/registration", RegistrationController, :new_admin
     post "/registration", RegistrationController, :create_admin
+  end
+
+  scope "/blocked", AttendanceAppWeb do
+    pipe_through [:browser, :protected, :blocked]
+
+    get "/", BlockController, :index
   end
 
   scope "/api", AttendanceAppWeb.API do

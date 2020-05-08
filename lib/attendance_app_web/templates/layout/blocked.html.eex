@@ -13,16 +13,6 @@
         <div class='navbar'>
             <ul>
                 <li><a class="logo" href="/">Innopolis attendance monitoring system</a></li>
-                    <li><a href="/">Statistic</a></li>
-                    <li>
-                        <%= link "Enrollment", to: "/administrator/enroll" %>
-                    </li>
-                    <li>
-                        <%= link "Blocking", to: "/administrator/blocking" %>
-                    </li>
-                    <li>
-                        <%= link "Admin registration", to: "/administrator/registration" %>
-                    </li>
                     <li class="right">
                         <%= link "Logout", to: "/logout", method: :delete %>
                     </li>
