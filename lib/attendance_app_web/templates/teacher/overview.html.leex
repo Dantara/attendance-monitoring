@@ -3,6 +3,9 @@
     <tr>
       <th>Title</th>
       <th>Attendance points</th>
+      <th>Activities per week</th>
+      <th>Max points</th>
+      <th>Attendance ratio</th>
     </tr>
   </thead>
   <tbody>
@@ -10,6 +13,9 @@
         <tr>
           <th><%= o.title %></th>
           <th><%= o.points %></th>
+          <th><%= o.activities_per_week %></th>
+          <th><%= max_points(@current_week, o.activities_per_week) %></th>
+          <th><%= attendance_ratio(@current_week, o.activities_per_week, o.points) %> %</th>
         </tr>
         <% end %>
   </tbody>

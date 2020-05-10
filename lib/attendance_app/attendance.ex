@@ -129,12 +129,20 @@ defmodule AttendanceApp.Attendance do
     |> Repo.preload([{:user, :role}, {:user, :classes}, :class, :activity])
   end
 
+  def current_week do
+    query = from p in Presence,
+    select: max(p.week)
+
+    Repo.one(query)
+  end
+
   defp student_overview_mapper(class, user) do
     query = from p in Presence,
       where: p.user_id == ^user.id and p.class_id == ^class.id,
       select: count(p.id)
 
-    %{id: class.id, title: class.title, points: Repo.one(query)}
+    %{id: class.id, title: class.title,
+      points: Repo.one(query), activities_per_week: class.activities_per_week}
   end
 
   defp teacher_overview_mapper(class) do
@@ -142,6 +150,7 @@ defmodule AttendanceApp.Attendance do
       where: p.class_id == ^class.id,
       select: count(p.id)
 
-    %{id: class.id, title: class.title, points: Repo.one(query)}
+    %{id: class.id, title: class.title,
+      points: Repo.one(query), activities_per_week: class.activities_per_week}
   end
 end

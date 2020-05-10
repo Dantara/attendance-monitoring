@@ -13,6 +13,7 @@ defmodule AttendanceAppWeb.Live.StudentStatistic do
   def mount(_params, session, socket) do
     classes = session["classes"]
     user = session["user"]
+    current_week = session["current_week"]
 
     overview = Attendance.student_overview user
 
@@ -28,7 +29,8 @@ defmodule AttendanceAppWeb.Live.StudentStatistic do
                                class_id: class_id,
                                user: user,
                                overview: overview,
-                               detailed: detailed})}
+                               detailed: detailed,
+                               current_week: current_week})}
       _ ->
         {:ok, assign(socket, %{right_render: "overview.html",
                                modes: @modes,
@@ -37,7 +39,8 @@ defmodule AttendanceAppWeb.Live.StudentStatistic do
                                class_id: nil,
                                user: user,
                                overview: overview,
-                               detailed: nil})}
+                               detailed: nil,
+                               current_week: current_week})}
     end
   end
 

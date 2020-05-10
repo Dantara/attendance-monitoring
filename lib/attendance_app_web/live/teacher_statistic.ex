@@ -14,9 +14,10 @@ defmodule AttendanceAppWeb.Live.TeacherStatistic do
   def mount(_params, session, socket) do
     classes = session["classes"]
     user = session["user"]
+    current_week = session["current_week"]
 
     {:ok, update_socket(socket, "overview.html", user, "overview", classes,
-        nil, nil, nil, [], [])}
+        nil, nil, nil, [], [], current_week)}
 
   end
 
@@ -30,9 +31,10 @@ defmodule AttendanceAppWeb.Live.TeacherStatistic do
     students = socket.assigns.students
     overview = socket.assigns.overview
     detailed = socket.assigns.detailed
+    current_week = socket.assigns.current_week
 
     {:noreply, update_socket(socket, right_render, user, mode, classes,
-        class_id, students, student_id, overview, detailed)}
+        class_id, students, student_id, overview, detailed, current_week)}
 
   end
 
@@ -46,9 +48,10 @@ defmodule AttendanceAppWeb.Live.TeacherStatistic do
     students = socket.assigns.students
     overview = socket.assigns.overview
     detailed = socket.assigns.detailed
+    current_week = socket.assigns.current_week
 
     {:noreply, update_socket(socket, right_render, user, mode, classes,
-        class_id, students, student_id, overview, detailed)}
+        class_id, students, student_id, overview, detailed, current_week)}
 
   end
 
@@ -61,11 +64,12 @@ defmodule AttendanceAppWeb.Live.TeacherStatistic do
     students = socket.assigns.students
     overview = socket.assigns.overview
     detailed = socket.assigns.detailed
+    current_week = socket.assigns.current_week
 
     {class_id, _} = Integer.parse(class_id)
 
     {:noreply, update_socket(socket, right_render, user, mode, classes,
-        class_id, students, student_id, overview, detailed)}
+        class_id, students, student_id, overview, detailed, current_week)}
 
   end
 
@@ -78,13 +82,14 @@ defmodule AttendanceAppWeb.Live.TeacherStatistic do
     students = socket.assigns.students
     overview = socket.assigns.overview
     detailed = socket.assigns.detailed
+    current_week = socket.assigns.current_week
 
     {:noreply, update_socket(socket, right_render, user, mode, classes,
-        class_id, students, student_id, overview, detailed)}
+        class_id, students, student_id, overview, detailed, current_week)}
   end
 
   defp update_socket(socket, right_render, user, mode, classes,
-    class_id, students, student_id, overview, detailed) do
+    class_id, students, student_id, overview, detailed, current_week) do
 
     case {classes, class_id, students, student_id, overview, detailed} do
       {[f_class | _], nil, [f_student | _], nil, _, _} ->
@@ -94,14 +99,14 @@ defmodule AttendanceAppWeb.Live.TeacherStatistic do
         detailed = Attendance.student_class_presences f_student, class_id
 
         set_socket(socket, right_render, user, mode, classes,
-          class_id, students, student_id, overview, detailed)
+          class_id, students, student_id, overview, detailed, current_week)
 
       {[f_class | _], nil, nil, _, _, _} ->
         class_id = f_class.id
         students = Accounts.course_students class_id
 
         update_socket(socket, right_render, user, mode, classes,
-          class_id, students, student_id, overview, detailed)
+          class_id, students, student_id, overview, detailed, current_week)
 
       {[_class | _], _, [f_student | _], nil, _, _} ->
         student_id = f_student.id
@@ -109,7 +114,7 @@ defmodule AttendanceAppWeb.Live.TeacherStatistic do
         detailed = Attendance.student_class_presences f_student, class_id
 
         set_socket(socket, right_render, user, mode, classes,
-          class_id, students, student_id, overview, detailed)
+          class_id, students, student_id, overview, detailed, current_week)
 
       {[_class | _], _, [_student | _], _, _, _} ->
         overview = Attendance.teacher_overview user
@@ -117,7 +122,7 @@ defmodule AttendanceAppWeb.Live.TeacherStatistic do
         detailed = Attendance.student_class_presences student, class_id
 
         set_socket(socket, right_render, user, mode, classes,
-          class_id, students, student_id, overview, detailed)
+          class_id, students, student_id, overview, detailed, current_week)
 
       {[f_class | _], _, [], _, _, _} ->
         overview = Attendance.teacher_overview user
@@ -126,23 +131,22 @@ defmodule AttendanceAppWeb.Live.TeacherStatistic do
         detailed = get_detailed student_id, class_id
 
         set_socket(socket, right_render, user, mode, classes,
-          class_id, students, student_id, overview, detailed)
+          class_id, students, student_id, overview, detailed, current_week)
 
       _ ->
         set_socket(socket, right_render, user, mode, classes,
-          class_id, students, student_id, overview, detailed)
+          class_id, students, student_id, overview, detailed, current_week)
     end
   end
 
   defp set_socket(socket, right_render, user, mode, classes,
-    class_id, students, student_id, overview, detailed) do
-
-    IO.inspect class_id
+    class_id, students, student_id, overview, detailed, current_week) do
 
     assign(socket, %{right_render: right_render, user: user, modes: @modes,
                      mode: mode, classes: classes, class_id: class_id,
                      students: students, student_id: student_id,
-                     overview: overview, detailed: detailed})
+                     overview: overview, detailed: detailed,
+                     current_week: current_week})
   end
 
   defp first_id([l | _]), do: l.id

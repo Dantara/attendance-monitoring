@@ -72,7 +72,8 @@ defmodule AttendanceApp.Accounts do
       from u in User,
       where: u.id == ^user.id,
       join: c in assoc(u, :classes),
-      select: %{id: c.id, title: c.title},
+      select: %{id: c.id, title: c.title,
+                activities_per_week: c.activities_per_week},
       order_by: [{:asc, c.title}]
 
     Repo.all(user_enrolls_query)
@@ -83,7 +84,8 @@ defmodule AttendanceApp.Accounts do
       from u in User,
       where: u.id == ^user.id,
       join: c in assoc(u, :classes),
-      select: %{id: c.id, title: c.title}
+      select: %{id: c.id, title: c.title,
+                activities_per_week: c.activities_per_week}
 
     all_classes =
       from c in Class,

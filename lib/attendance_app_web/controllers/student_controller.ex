@@ -1,13 +1,16 @@
 defmodule AttendanceAppWeb.StudentController do
   use AttendanceAppWeb, :controller
   alias AttendanceApp.Accounts
+  alias AttendanceApp.Attendance
 
   def index(conn, _params) do
     current_user = Pow.Plug.current_user(conn)
     enrolls = Accounts.user_enrolls(current_user)
+    current_week = Attendance.current_week
 
     live_render(conn, AttendanceAppWeb.Live.StudentStatistic,
-      session: %{"user" => current_user, "classes" => enrolls})
+      session: %{"user" => current_user, "classes" => enrolls,
+                 "current_week" => current_week})
   end
 
   def enroll(conn, _params) do
