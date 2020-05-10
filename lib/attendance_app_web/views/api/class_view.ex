@@ -12,6 +12,7 @@ defmodule AttendanceAppWeb.API.ClassView do
 
   def render("class.json", %{class: class}) do
     %{id: class.id,
-      title: class.title}
+      title: class.title,
+      activities_per_week: class.activities_per_week}
   end
 end
