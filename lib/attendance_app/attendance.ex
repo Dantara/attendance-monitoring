@@ -72,17 +72,39 @@ defmodule AttendanceApp.Attendance do
   end
 
   def create_presence(attrs \\ %{}) do
-    %Presence{}
-    |> Repo.preload([{:user, :role}, {:user, :classes}, :class, :activity])
-    |> Presence.changeset(attrs)
-    |> Repo.insert()
+    query = from p in Presence,
+      where: p.user_id == ^attrs["user_id"]
+    and p.class_id == ^attrs["class_id"]
+    and p.week == ^attrs["week"]
+    and p.activity_id == ^attrs["activity_id"]
+
+    case Repo.one(query) do
+      nil ->
+        %Presence{}
+        |> Repo.preload([{:user, :role}, {:user, :classes}, :class, :activity])
+        |> Presence.changeset(attrs)
+        |> Repo.insert()
+      record ->
+        {:ok, record}
+    end
   end
 
   def update_presence(%Presence{} = presence, attrs) do
-    presence
-    |> Repo.preload([{:user, :role}, {:user, :classes}, :class, :activity])
-    |> Presence.changeset(attrs)
-    |> Repo.update()
+    query = from p in Presence,
+      where: p.user_id == ^attrs["user_id"]
+    and p.class_id == ^attrs["class_id"]
+    and p.week == ^attrs["week"]
+    and p.activity_id == ^attrs["activity_id"]
+
+    case Repo.one(query) do
+      nil ->
+        presence
+        |> Repo.preload([{:user, :role}, {:user, :classes}, :class, :activity])
+        |> Presence.changeset(attrs)
+        |> Repo.update()
+      record ->
+        {:ok, record}
+    end
   end
 
   def delete_presence(%Presence{} = presence) do
@@ -131,7 +153,7 @@ defmodule AttendanceApp.Attendance do
 
   def current_week do
     query = from p in Presence,
-    select: max(p.week)
+      select: max(p.week)
 
     Repo.one(query)
   end
