@@ -9,12 +9,19 @@
             <%= label f, :password %>
             <%= password_input f, :password %>
 
-            <%= submit "Log in" %>
-            <%= link " Register", to: "/signup" %>
+            <div class="buttons">
+                <%= submit "Log in" %>
+                <%= link " Register", to: "/signup" %>
 
-            <div class="right">
-                <%= for link <- PowAssent.Phoenix.ViewHelpers.provider_links(@conn),
-                do: content_tag(:span, link) %>
+                <%#= for link <- PowAssent.Phoenix.ViewHelpers.provider_links(@conn), do: content_tag(:span, link) %>
+
+                <div class="right">
+                    <div class="google_link">
+                        <a href="/auth/google/new">
+                            <img alt="" src="/images/btn_google_signin_light_normal_web.png"/>
+                        </a>
+                    </div>
+                </div>
             </div>
         <% end %>
     </div>
