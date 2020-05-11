@@ -44,7 +44,11 @@ defmodule AttendanceApp.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:pow, "~> 1.0.19"},
-      {:phoenix_live_view, "~> 0.11.1"}
+      {:phoenix_live_view, "~> 0.11.1"},
+      {:pow_assent, "~> 0.4.7"},
+      # Optional, but recommended for SSL validation with :httpc adapter
+      {:certifi, "~> 2.4"},
+      {:ssl_verify_fun, "~> 1.1"},
     ]
   end
 

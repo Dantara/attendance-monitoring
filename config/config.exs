@@ -35,6 +35,15 @@ config :attendance_app, :pow,
   repo: AttendanceApp.Repo,
   web_module: AttendanceAppWeb
 
+config :attendance_app, :pow_assent,
+  providers: [
+    google: [
+      client_id: "458604734689-fpeflhg3kfjb1gaqqpd162bacgunom0c.apps.googleusercontent.com",
+      client_secret: "wZiEg_WCM62TeqmpjF2SGQUF",
+      strategy: Assent.Strategy.Google
+    ]
+  ]
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
