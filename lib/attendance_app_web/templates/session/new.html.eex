@@ -11,6 +11,11 @@
 
             <%= submit "Log in" %>
             <%= link " Register", to: "/signup" %>
+
+            <div class="right">
+                <%= for link <- PowAssent.Phoenix.ViewHelpers.provider_links(@conn),
+                do: content_tag(:span, link) %>
+            </div>
         <% end %>
     </div>
 </div>

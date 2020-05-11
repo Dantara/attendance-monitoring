@@ -89,7 +89,8 @@ defmodule AttendanceApp.Accounts do
 
     all_classes =
       from c in Class,
-      select: %{id: c.id, title: c.title}
+      select: %{id: c.id, title: c.title,
+                activities_per_week: c.activities_per_week}
 
     sorted = except(all_classes, ^user_enrolls_query)
     from s in subquery(sorted),
