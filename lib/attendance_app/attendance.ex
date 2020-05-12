@@ -145,7 +145,8 @@ defmodule AttendanceApp.Attendance do
 
   def student_class_presences(user, class_id) do
     query = from p in Presence,
-      where: p.user_id == ^user.id and p.class_id == ^class_id
+      where: p.user_id == ^user.id and p.class_id == ^class_id,
+      order_by: [{:asc, p.week}]
 
     Repo.all(query)
     |> Repo.preload([{:user, :role}, {:user, :classes}, :class, :activity])
